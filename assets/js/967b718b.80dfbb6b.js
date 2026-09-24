@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkapi_onlyoffice_com=self.webpackChunkapi_onlyoffice_com||[]).push([[192471],{231984:e=>{e.exports=JSON.parse('{"metadata":{"permalink":"/docspace-plugin-sdk/changelog","page":1,"postsPerPage":50,"totalPages":1,"totalCount":50,"blogDescription":"The history of updates and changes to the documentation.","blogTitle":"Changelog"}}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkapi_onlyoffice_com=self.webpackChunkapi_onlyoffice_com||[]).push([[81903],{101912:e=>{e.exports=JSON.parse('{"blogBasePath":"/docspace-plugin-sdk/changelog","blogTitle":"Changelog","authorsListPath":"/docspace-plugin-sdk/changelog/authors"}')}}]);
