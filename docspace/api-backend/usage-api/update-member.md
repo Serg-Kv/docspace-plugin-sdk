@@ -1,0 +1,183 @@
+# Update a user
+
+`PUT /api/2.0/people/{userid}`
+
+Updates the data for the selected portal user with the first name, last name, email address, and/or optional parameters specified in the request.
+
+Operation ID: `updateMember`
+
+## Authorization
+
+One of:
+
+- `asc_auth_key` (apiKey) — `asc_auth_key` in cookie
+- `Bearer` (http bearer)
+- `ApiKeyBearer` (apiKey) — `ApiKeyBearer` in header
+- `Basic` (http basic)
+- `OAuth2` (oauth2)
+- `OpenId` (openIdConnect)
+
+## Parameters
+
+| Name | In | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `userid` | path | string | Yes | The user ID. Example: `9846`. |
+
+## Request body
+
+The request parameters for updating the user information.
+
+Content type: `application/json`
+
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `userId` | string, nullable | No | The user ID. Example: `9846`. |
+| `disable` | boolean, nullable | No | Specifies whether to disable a user or not. Example: `true`. |
+| `email` | string (email), nullable | No | The user email address. Example: `Sydney_Roberts4@hotmail.com`. |
+| `isUser` | boolean, nullable | No | Specifies if this is a guest or a user. Example: `true`. |
+| `firstName` | string, nullable | No | The user first name. Example: `Winfield`. |
+| `lastName` | string, nullable | No | The user last name. Example: `Wyman`. |
+| `department` | string[] (uuid), nullable | No | The list of the user departments. |
+| `title` | string, nullable | No | The user title. Example: `legacy_1080p_small_wooden_mouse`. |
+| `location` | string, nullable | No | The user location. Example: `001 Schroeder Run, New Tabithaport, Colombia`. |
+| `sex` | string | No | The user sex. One of: `Female`, `Male`. Example: `Female`. |
+| `birthday` | object | No | The API date and time parameters. |
+| `birthday.utcTime` | string (date-time) | No | The time in UTC format. Example: `2008-04-10T06:30:00.0000000+04:00`. |
+| `birthday.timeZoneOffset` | string (date-span) | No | The time zone offset. Example: `00:00:00`. |
+| `worksfrom` | object | No | The API date and time parameters. |
+| `worksfrom.utcTime` | string (date-time) | No | The time in UTC format. Example: `2008-04-10T06:30:00.0000000+04:00`. |
+| `worksfrom.timeZoneOffset` | string (date-span) | No | The time zone offset. Example: `00:00:00`. |
+| `comment` | string, nullable | No | The user comment. Example: `some text`. |
+| `contacts` | object[], nullable | No | The list of the user contacts. |
+| `contacts.type` | string, nullable | No | The contact type. Example: `GTalk`. |
+| `contacts.value` | string, nullable | No | The contact value. Example: `my@gmail.com`. |
+| `files` | string, nullable | No | The user avatar photo URL. Example: `some text`. |
+| `spam` | boolean, nullable | No | Specifies if tips, updates and offers are allowed to be sent to the user or not. Example: `true`. |
+
+Example:
+
+```json
+{
+  "userId": "9846",
+  "disable": true,
+  "email": "Sydney_Roberts4@hotmail.com",
+  "isUser": true,
+  "firstName": "Winfield",
+  "lastName": "Wyman",
+  "department": [
+    "75a5f745-f697-4418-b38d-0fe0d277e258"
+  ],
+  "title": "legacy_1080p_small_wooden_mouse",
+  "location": "001 Schroeder Run, New Tabithaport, Colombia",
+  "sex": "Female",
+  "birthday": {},
+  "worksfrom": {},
+  "comment": "some text",
+  "contacts": [
+    {
+      "type": "GTalk",
+      "value": "my@gmail.com"
+    }
+  ],
+  "files": "some text",
+  "spam": true
+}
+```
+
+## Responses
+
+### 200 — Updated user with the detailed information
+
+Content type: `application/json`
+
+| Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `response` | object | No | The full list of user parameters. |
+| `response.id` | string (uuid) | No | The user ID. Example: `{00000000-0000-0000-0000-000000000000}`. |
+| `response.displayName` | string, nullable | No | The user display name. Example: `Mike Zanyatski`. |
+| `response.title` | string, nullable | No | The user title. Example: `Manager`. |
+| `response.avatar` | string, nullable | No | The user avatar. Example: `some text`. |
+| `response.avatarOriginal` | string, nullable | No | The user original size avatar. Example: `some text`. |
+| `response.avatarMax` | string, nullable | No | The user maximum size avatar. Example: `some text`. |
+| `response.avatarMedium` | string, nullable | No | The user medium size avatar. Example: `some text`. |
+| `response.avatarSmall` | string, nullable | No | The user small size avatar. Example: `url to small avatar`. |
+| `response.profileUrl` | string, nullable | No | The user profile URL. Example: `some text`. |
+| `response.hasAvatar` | boolean | No | Specifies if the user has an avatar or not. Example: `true`. |
+| `response.isAnonim` | boolean | No | Specifies if the user is anonymous or not. Example: `true`. |
+| `response.firstName` | string, nullable | No | The user first name. Example: `Mike`. |
+| `response.lastName` | string, nullable | No | The user last name. Example: `Zanyatski`. |
+| `response.userName` | string, nullable | No | The user username. Example: `Mike.Zanyatski`. |
+| `response.email` | string (email), nullable | No | The user email. Example: `my@gmail.com`. |
+| `response.contacts` | object[], nullable | No | The list of user contacts. |
+| `response.contacts.type` | string, nullable | No | The contact type. Example: `GTalk`. |
+| `response.contacts.value` | string, nullable | No | The contact value. Example: `my@gmail.com`. |
+| `response.birthday` | object | No | The API date and time parameters. |
+| `response.birthday.utcTime` | string (date-time) | No | The time in UTC format. Example: `2008-04-10T06:30:00.0000000+04:00`. |
+| `response.birthday.timeZoneOffset` | string (date-span) | No | The time zone offset. Example: `00:00:00`. |
+| `response.sex` | string, nullable | No | The user sex. Example: `male`. |
+| `response.status` | string | No | The user status. One of: `Active`, `Terminated`, `Pending`, `Default`, `All`. Example: `Active`. |
+| `response.activationStatus` | string | No | The user activation status. One of: `NotActivated`, `Activated`, `Pending`, `AutoGenerated`. Example: `NotActivated`. |
+| `response.terminated` | object | No | The API date and time parameters. |
+| `response.terminated.utcTime` | string (date-time) | No | The time in UTC format. Example: `2008-04-10T06:30:00.0000000+04:00`. |
+| `response.terminated.timeZoneOffset` | string (date-span) | No | The time zone offset. Example: `00:00:00`. |
+| `response.department` | string, nullable | No | The user department. Example: `Marketing`. |
+| `response.workFrom` | object | No | The API date and time parameters. |
+| `response.workFrom.utcTime` | string (date-time) | No | The time in UTC format. Example: `2008-04-10T06:30:00.0000000+04:00`. |
+| `response.workFrom.timeZoneOffset` | string (date-span) | No | The time zone offset. Example: `00:00:00`. |
+| `response.groups` | object[], nullable | No | The list of user groups. |
+| `response.groups.id` | string (uuid) | Yes | The group ID. Example: `{00000000-0000-0000-0000-000000000000}`. |
+| `response.groups.name` | string, nullable | Yes | The group name. Example: `Group Name`. |
+| `response.groups.manager` | string, nullable | No | The group manager. Example: `Jake.Zazhitski`. |
+| `response.groups.isSystem` | boolean, nullable | No | Indicates whether the group is a system group. Example: `true`. |
+| `response.location` | string, nullable | No | The user location. Example: `Palo Alto`. |
+| `response.notes` | string, nullable | No | The user notes. Example: `Notes to worker`. |
+| `response.isAdmin` | boolean | No | Specifies if the user is an administrator or not. Example: `false`. |
+| `response.isRoomAdmin` | boolean | No | Specifies if the user is a room administrator or not. Example: `true`. |
+| `response.isLDAP` | boolean | No | Specifies if the LDAP settings are enabled for the user or not. Example: `false`. |
+| `response.listAdminModules` | string[], nullable | No | The list of the administrator modules. Example: `["projects", "crm"]`. |
+| `response.isOwner` | boolean | No | Specifies if the user is a portal owner or not. Example: `true`. |
+| `response.isVisitor` | boolean | No | Specifies if the user is a portal visitor or not. Example: `true`. |
+| `response.isCollaborator` | boolean | No | Specifies if the user is a portal collaborator or not. Example: `true`. |
+| `response.cultureName` | string, nullable | No | The user culture code. Example: `en-EN`. |
+| `response.mobilePhone` | string, nullable | No | The user mobile phone number. Example: `some text`. |
+| `response.mobilePhoneActivationStatus` | string | No | The user mobile phone activation status. One of: `NotActivated`, `Activated`. Example: `NotActivated`. |
+| `response.isSSO` | boolean | No | Specifies if the SSO settings are enabled for the user or not. Example: `false`. |
+| `response.theme` | string | No | The theme type. One of: `Base`, `Dark`, `System`. Example: `Base`. |
+| `response.quotaLimit` | integer (int64), nullable | No | The user quota limit. Example: `1234`. |
+| `response.usedSpace` | number (double), nullable | No | The portal used space of the user. Example: `12345`. |
+| `response.shared` | boolean, nullable | No | Specifies if the user has access rights. Example: `true`. |
+| `response.isCustomQuota` | boolean, nullable | No | Specifies if the user has a custom quota or not. Example: `true`. |
+| `response.loginEventId` | integer (int32), nullable | No | The current login event ID. Example: `1234`. |
+| `response.authCookieLifetime` | number (double), nullable | No | The auth cookie lifetime in seconds. Example: `-8.5`. |
+| `response.createdBy` | object | No | The user parameters. |
+| `response.createdBy.id` | string (uuid) | No | The user ID. Example: `{00000000-0000-0000-0000-000000000000}`. |
+| `response.createdBy.displayName` | string, nullable | No | The user display name. Example: `Mike Zanyatski`. |
+| `response.createdBy.title` | string, nullable | No | The user title. Example: `Manager`. |
+| `response.createdBy.avatar` | string, nullable | No | The user avatar. Example: `some text`. |
+| `response.createdBy.avatarOriginal` | string, nullable | No | The user original size avatar. Example: `some text`. |
+| `response.createdBy.avatarMax` | string, nullable | No | The user maximum size avatar. Example: `some text`. |
+| `response.createdBy.avatarMedium` | string, nullable | No | The user medium size avatar. Example: `some text`. |
+| `response.createdBy.avatarSmall` | string, nullable | No | The user small size avatar. Example: `url to small avatar`. |
+| `response.createdBy.profileUrl` | string, nullable | No | The user profile URL. Example: `some text`. |
+| `response.createdBy.hasAvatar` | boolean | No | Specifies if the user has an avatar or not. Example: `true`. |
+| `response.createdBy.isAnonim` | boolean | No | Specifies if the user is anonymous or not. Example: `true`. |
+| `response.registrationDate` | object | No | The API date and time parameters. |
+| `response.registrationDate.utcTime` | string (date-time) | No | The time in UTC format. Example: `2008-04-10T06:30:00.0000000+04:00`. |
+| `response.registrationDate.timeZoneOffset` | string (date-span) | No | The time zone offset. Example: `00:00:00`. |
+| `response.hasPersonalFolder` | boolean | No | Specifies if the user has a personal folder or not. Example: `true`. |
+| `response.tfaAppEnabled` | boolean, nullable | No | Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app. Example: `true`. |
+| `count` | integer (int32) | No |  |
+| `links` | object[] | No |  |
+| `links.href` | string | No |  |
+| `links.action` | string | No |  |
+| `status` | integer (int32) | No |  |
+| `statusCode` | integer (int32) | No |  |
+
+### 400 — Incorrect user name
+
+### 401 — Unauthorized
+
+### 403 — You don't have enough permission to perform the operation
+
+### 404 — User not found
+
